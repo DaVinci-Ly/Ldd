@@ -1,0 +1,37 @@
+# ديوان البيانات الليبي — ldd.ly
+# Search engines may index the site; AI-training and scraping crawlers may not (see LICENSE).
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ldd.ly/sitemap.xml

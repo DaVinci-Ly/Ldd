@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الصفحة غير موجودة — ديوان البيانات الليبي</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0D1014" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
+  <!-- Absolute paths: GitHub Pages serves this page at whatever URL was missing -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F6F5F1;
+      --surface: #FFFFFF;
+      --text: #1A1D21;
+      --muted: #6B7280;
+      --faint: #9AA0AA;
+      --border: rgba(26, 29, 33, 0.10);
+      --arch: #07252B;
+      --key: #34C7A9;
+      --brand: #1A6B5A;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0D1014;
+        --surface: #14181E;
+        --text: #E2E6EC;
+        --muted: #8B93A0;
+        --faint: #5A616E;
+        --border: rgba(226, 230, 236, 0.09);
+        --arch: #F2F4F7;
+        --brand: #2EB89A;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 56px 16px 40px;
+    }
+
+    /* The arch without its keystone: something is missing here */
+    .mark { width: 88px; height: 88px; margin-bottom: 26px; }
+    .mark .arch { fill: var(--arch); }
+    .mark .key { fill: none; stroke: var(--key); stroke-width: 2; stroke-dasharray: 3 3; }
+
+    .code {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--key);
+      direction: ltr;
+    }
+
+    h1 {
+      margin-top: 6px;
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    p {
+      margin-top: 10px;
+      max-width: 400px;
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 30px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .home:hover { border-color: var(--key); }
+
+    footer {
+      padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--faint);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <svg class="mark" viewBox="0 0 120 120" aria-hidden="true">
+      <path class="arch" d="M15,105 L15,64 A45,45 0 0 1 105,64 L105,105 L88,105 L88,64 A28,28 0 0 0 32,64 L32,105 Z"/>
+      <path class="key" d="M54.2,36.6 L50.6,20 A45,45 0 0 1 69.4,20 L65.8,36.6 Z"/>
+    </svg>
+
+    <div class="code">404</div>
+    <h1>الصفحة غير موجودة</h1>
+    <p>الرابط الذي فتحته غير صحيح أو لم يعد متاحاً.</p>
+
+    <a class="home" href="/">
+      العودة إلى الصفحة الرئيسية
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+  </main>
+
+  <footer>© <span id="year">2026</span> ديوان البيانات الليبي. جميع الحقوق محفوظة.</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
