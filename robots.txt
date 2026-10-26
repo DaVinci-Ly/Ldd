@@ -34,4 +34,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://ldd.ly/sitemap.xml
+Sitemap: https://www.ldd.ly/sitemap.xml

@@ -5,135 +5,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>الصفحة غير موجودة — ديوان البيانات الليبي</title>
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#0D1014" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#07252B">
   <!-- Absolute paths: GitHub Pages serves this page at whatever URL was missing -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #F6F5F1;
-      --surface: #FFFFFF;
-      --text: #1A1D21;
-      --muted: #6B7280;
-      --faint: #9AA0AA;
-      --border: rgba(26, 29, 33, 0.10);
-      --arch: #07252B;
+      --ink: #07252B;
+      --ink-2: #0B2F36;
+      --paper: #ECF0EE;
+      --dim: rgba(236, 240, 238, 0.58);
+      --line: rgba(236, 240, 238, 0.16);
       --key: #34C7A9;
-      --brand: #1A6B5A;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0D1014;
-        --surface: #14181E;
-        --text: #E2E6EC;
-        --muted: #8B93A0;
-        --faint: #5A616E;
-        --border: rgba(226, 230, 236, 0.09);
-        --arch: #F2F4F7;
-        --brand: #2EB89A;
-      }
+      --gutter: clamp(20px, 4.5vw, 64px);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Cairo', system-ui, sans-serif;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
-    main {
-      flex: 1;
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto 1fr auto auto;
+      padding: 0 var(--gutter);
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .top .mark { display: flex; align-items: center; gap: 12px; font-weight: 500; }
+    .top .mark svg { width: 26px; height: 26px; }
+    .top .latin { direction: ltr; color: var(--dim); letter-spacing: 0.04em; }
+
+    .hero {
+      position: relative;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 56px 16px 40px;
+      justify-content: flex-end;
+      padding: 14vh 0 44px;
     }
 
-    /* The arch without its keystone: something is missing here */
-    .mark { width: 88px; height: 88px; margin-bottom: 26px; }
-    .mark .arch { fill: var(--arch); }
-    .mark .key { fill: none; stroke: var(--key); stroke-width: 2; stroke-dasharray: 3 3; }
-
-    .code {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: var(--key);
-      direction: ltr;
+    /* The doorway without its keystone: the thing you were looking for isn't here */
+    .arch {
+      position: absolute;
+      inset-inline-end: 0;
+      bottom: 0;
+      height: 86%;
+      width: auto;
+      max-width: 46%;
+      pointer-events: none;
     }
+
+    .arch .body { fill: var(--ink-2); }
+    .arch .gap { fill: none; stroke: var(--key); stroke-width: 0.6; stroke-dasharray: 1.6 1.6; }
+
+    .code { position: relative; direction: ltr; text-align: right; font-size: 15px; color: var(--key); letter-spacing: 0.1em; }
 
     h1 {
-      margin-top: 6px;
-      font-size: clamp(26px, 5vw, 34px);
-      font-weight: 800;
-      line-height: 1.4;
+      position: relative;
+      margin-top: 8px;
+      font-size: clamp(44px, 7.4vw, 108px);
+      font-weight: 700;
+      line-height: 1.15;
     }
 
-    p {
-      margin-top: 10px;
-      max-width: 400px;
-      font-size: 16px;
-      line-height: 1.9;
-      color: var(--muted);
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px 32px;
+      padding: 20px 0 9vh;
+      border-top: 1px solid var(--line);
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 300;
+      color: var(--dim);
     }
 
-    .home {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 30px;
-      padding: 10px 22px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: border-color 0.2s;
-    }
-
-    .home:hover { border-color: var(--key); }
+    .meta a { color: var(--paper); font-weight: 500; transition: color 0.2s; }
+    .meta a:hover { color: var(--key); }
 
     footer {
-      padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
-      border-top: 1px solid var(--border);
-      text-align: center;
-      font-size: 12.5px;
-      color: var(--faint);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0 calc(22px + env(safe-area-inset-bottom));
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    @media (max-width: 720px) {
+      .arch { max-width: 62%; height: 78%; }
+      .hero { padding-top: 64vw; }
+      .meta { padding-bottom: 48px; }
+      footer { flex-direction: column; gap: 4px; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <svg class="mark" viewBox="0 0 120 120" aria-hidden="true">
-      <path class="arch" d="M15,105 L15,64 A45,45 0 0 1 105,64 L105,105 L88,105 L88,64 A28,28 0 0 0 32,64 L32,105 Z"/>
-      <path class="key" d="M54.2,36.6 L50.6,20 A45,45 0 0 1 69.4,20 L65.8,36.6 Z"/>
-    </svg>
+  <div class="page">
+    <header class="top">
+      <a class="mark" href="/">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <path fill="#ECF0EE" d="M15,105 L15,64 A45,45 0 0 1 105,64 L105,105 L88,105 L88,64 A28,28 0 0 0 32,64 L32,105 Z"/>
+          <path fill="#34C7A9" d="M54.2,36.6 L50.6,20 A45,45 0 0 1 69.4,20 L65.8,36.6 Z"/>
+        </svg>
+        ldd.ly
+      </a>
+      <span class="latin">Libyan Data Diwan</span>
+    </header>
 
-    <div class="code">404</div>
-    <h1>الصفحة غير موجودة</h1>
-    <p>الرابط الذي فتحته غير صحيح أو لم يعد متاحاً.</p>
+    <section class="hero">
+      <svg class="arch" viewBox="15 20 90 85" preserveAspectRatio="xMinYMax meet" aria-hidden="true">
+        <path class="body" d="M15,105 L15,64 A45,45 0 0 1 105,64 L105,105 L88,105 L88,64 A28,28 0 0 0 32,64 L32,105 Z"/>
+        <path class="gap" d="M54.2,36.6 L50.6,20 A45,45 0 0 1 69.4,20 L65.8,36.6 Z"/>
+      </svg>
+      <div class="code">404</div>
+      <h1>هذه الصفحة<br>غير موجودة</h1>
+    </section>
 
-    <a class="home" href="/">
-      العودة إلى الصفحة الرئيسية
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-    </a>
-  </main>
+    <div class="meta">
+      <span>الرابط الذي فتحته غير صحيح أو لم يعد متاحاً.</span>
+      <a href="/">العودة إلى الصفحة الرئيسية ←</a>
+    </div>
 
-  <footer>© <span id="year">2026</span> ديوان البيانات الليبي. جميع الحقوق محفوظة.</footer>
+    <footer>
+      <span>© <span id="year">2026</span> ديوان البيانات الليبي</span>
+      <span>جميع الحقوق محفوظة</span>
+    </footer>
+  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
