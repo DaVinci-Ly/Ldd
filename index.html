@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ديوان البيانات الليبي</title>
+  <meta name="description" content="ديوان البيانات الليبي لتقنية المعلومات والاتصالات. الموقع الرسمي قيد التجهيز.">
+  <meta name="copyright" content="© Ben Zahia Holding — ديوان البيانات الليبي. جميع الحقوق محفوظة.">
+  <meta name="theme-color" content="#0D1014" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
+  <meta property="og:title" content="ديوان البيانات الليبي">
+  <meta property="og:description" content="الموقع الرسمي قيد التجهيز.">
+  <meta property="og:url" content="https://ldd.ly">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F6F5F1;
+      --surface: #FFFFFF;
+      --text: #1A1D21;
+      --muted: #6B7280;
+      --faint: #9AA0AA;
+      --border: rgba(26, 29, 33, 0.10);
+      --arch: #07252B;
+      --key: #34C7A9;
+      --brand: #1A6B5A;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0D1014;
+        --surface: #14181E;
+        --text: #E2E6EC;
+        --muted: #8B93A0;
+        --faint: #5A616E;
+        --border: rgba(226, 230, 236, 0.09);
+        --arch: #F2F4F7;
+        --key: #34C7A9;
+        --brand: #2EB89A;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 56px 16px 40px;
+    }
+
+    .mark { width: 104px; height: 104px; margin-bottom: 28px; }
+    .mark .arch { fill: var(--arch); }
+    .mark .key {
+      fill: var(--key);
+      transform-origin: 60px 28px;
+      animation: settle 2.8s ease-in-out infinite;
+    }
+
+    /* The keystone eases into place and back: a site still being built */
+    @keyframes settle {
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 0.45; transform: translateY(-4px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mark .key { animation: none; }
+    }
+
+    h1 {
+      font-size: clamp(30px, 6vw, 42px);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--brand);
+    }
+
+    .sub {
+      margin-top: 4px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 32px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 14.5px;
+      font-weight: 600;
+    }
+
+    .status i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--key);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .lead {
+      margin-top: 18px;
+      max-width: 440px;
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .en {
+      margin-top: 6px;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--faint);
+      direction: ltr;
+    }
+
+    .work {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 440px;
+      margin-top: 44px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      color: inherit;
+      text-decoration: none;
+      text-align: start;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .work:hover {
+      border-color: var(--key);
+      transform: translateY(-2px);
+    }
+
+    .work-text { flex: 1; min-width: 0; }
+
+    .work-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand);
+    }
+
+    .work-title {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .work-desc {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .work svg {
+      flex-shrink: 0;
+      color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .work:hover svg {
+      color: var(--key);
+      transform: translateX(-3px);
+    }
+
+    footer {
+      padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--faint);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <svg class="mark" viewBox="0 0 120 120" role="img" aria-label="شعار ديوان البيانات الليبي">
+      <path class="arch" d="M15,105 L15,64 A45,45 0 0 1 105,64 L105,105 L88,105 L88,64 A28,28 0 0 0 32,64 L32,105 Z"/>
+      <path class="key" d="M54.2,36.6 L50.6,20 A45,45 0 0 1 69.4,20 L65.8,36.6 Z"/>
+    </svg>
+
+    <h1>ديوان البيانات الليبي</h1>
+    <p class="sub">لتقنية المعلومات والاتصالات</p>
+
+    <div class="status"><i aria-hidden="true"></i>الموقع قيد التجهيز</div>
+    <p class="lead">نعمل على إطلاق موقعنا الرسمي قريباً.</p>
+    <p class="en">Libyan Data Diwan · Website coming soon</p>
+
+    <a class="work" href="https://libyatenders.ldd.ly" target="_blank" rel="noopener">
+      <span class="work-text">
+        <span class="work-label">من أعمالنا</span>
+        <span class="work-title">متتبع العطاءات الحكومية</span>
+        <span class="work-desc">العطاءات الحكومية المفتوحة في مكان واحد</span>
+      </span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+  </main>
+
+  <footer>© <span id="year">2026</span> ديوان البيانات الليبي. جميع الحقوق محفوظة.</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
