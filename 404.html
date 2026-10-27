@@ -13,9 +13,6 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <link rel="preload" as="image" type="image/webp" href="/hero-wide.webp" media="(orientation: landscape)">
-  <link rel="preload" as="image" type="image/webp" href="/hero-tall.webp" media="(orientation: portrait)">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
@@ -24,7 +21,15 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="backdrop" aria-hidden="true"></div>
+  <div class="backdrop" aria-hidden="true">
+    <picture>
+      <source media="(orientation: portrait)" type="image/webp"
+              srcset="/scene-tall-720.webp 720w, /scene-tall-1080.webp 1080w, /scene-tall-1350.webp 1350w" sizes="100vw">
+      <img src="/scene-wide-1920.webp" srcset="/scene-wide-1280.webp 1280w, /scene-wide-1920.webp 1920w, /scene-wide-2400.webp 2400w"
+           sizes="100vw" width="2400" height="1350" fetchpriority="high"
+           alt="">
+    </picture>
+  </div>
 
   <header class="site-header">
     <div class="wrap">
