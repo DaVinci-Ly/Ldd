@@ -1,12 +1,12 @@
 {
-  "name": "Libyan Data Diwan",
-  "short_name": "LDD",
-  "description": "Libyan Data Diwan — information and communications technology.",
-  "lang": "en",
-  "dir": "ltr",
+  "name": "ديوان البيانات الليبي",
+  "short_name": "ديوان البيانات",
+  "description": "ديوان البيانات الليبي لتقنية المعلومات والاتصالات.",
+  "lang": "ar",
+  "dir": "rtl",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F4F3EE",
+  "background_color": "#07252B",
   "theme_color": "#07252B",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
