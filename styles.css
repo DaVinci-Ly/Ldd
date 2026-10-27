@@ -1,0 +1,295 @@
+/* Colours and type follow the Diwan brand package (60/30/10: Ink / Turquoise / Verdigris). */
+:root {
+  --bg: #F4F3EE;            /* Paper */
+  --surface: #FBFCFC;       /* Cloud */
+  --text: #07252B;          /* Ink */
+  --muted: #5E7374;
+  --line: rgba(7, 37, 43, 0.1);
+  --primary: #1C7E86;       /* Turquoise — icons, borders, fills */
+  --primary-text: #0E4B54;  /* Petrol — small accent text (Turquoise is < 4.5:1 on Paper) */
+  --primary-soft: rgba(28, 126, 134, 0.1);
+  --keystone: #34C7A9;      /* Verdigris — keystone only */
+  --arch: #07252B;
+  --dot: rgba(7, 37, 43, 0.07);
+  --shadow: 0 1px 2px rgba(7, 37, 43, 0.04), 0 8px 24px rgba(7, 37, 43, 0.05);
+
+  --font: "Cairo", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --gutter: clamp(16px, 5vw, 48px);
+  --measure: 640px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #07252B;          /* Ink */
+    --surface: #0B2F36;
+    --text: #FBFCFC;        /* Cloud */
+    --muted: #9FC4C0;
+    --line: rgba(251, 252, 252, 0.1);
+    --primary: #34C7A9;
+    --primary-text: #34C7A9;
+    --primary-soft: rgba(52, 199, 169, 0.12);
+    --arch: #FBFCFC;
+    --dot: rgba(251, 252, 252, 0.05);
+    --shadow: none;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.65;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Header — mirrors the brand's horizontal lockup: symbol · divider · name */
+.site-header { padding-block: 28px; }
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.brand-mark { width: 40px; height: 40px; flex: none; }
+.brand-mark .arch { fill: var(--arch); }
+.brand-mark .keystone { fill: var(--keystone); }
+
+.brand-divider {
+  align-self: stretch;
+  width: 1px;
+  margin-block: 4px;
+  background: var(--line);
+}
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-name strong {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.brand-name span {
+  align-self: flex-start;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Main */
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-block: 40px 64px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 4px 14px 4px 12px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pulse {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.6; }
+  to   { transform: scale(3); opacity: 0; }
+}
+
+h1 {
+  margin: 20px 0 14px;
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.lead {
+  margin: 0;
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: clamp(17px, 2vw, 19px);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+/* Progress */
+.progress {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 44px 0 0;
+  padding: 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.step {
+  padding: 20px;
+  border-inline-start: 1px solid var(--line);
+}
+
+.step:first-child { border-inline-start: 0; }
+
+.step-icon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+}
+
+.step-icon svg { width: 12px; height: 12px; }
+
+.step.is-done .step-icon {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--surface);
+}
+
+.step.is-current .step-icon { border-color: var(--primary); }
+
+.step-title {
+  display: block;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.step-state {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.step.is-current .step-state { color: var(--primary-text); }
+
+/* 404 — the brand arch with its keystone missing */
+.broken-arch {
+  display: block;
+  width: 88px;
+  height: auto;
+  margin-bottom: 28px;
+}
+
+.broken-arch .band {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.broken-arch .slot { fill: var(--line); }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 32px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.button:hover { opacity: 0.85; }
+
+/* Footer */
+.site-footer {
+  padding-block: 24px calc(24px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.site-footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+}
+
+@media (max-width: 560px) {
+  .progress { grid-template-columns: 1fr; }
+
+  .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 14px;
+    align-items: center;
+    padding: 16px 18px;
+    border-inline-start: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .step:first-child { border-top: 0; }
+  .step-icon { grid-row: span 2; margin: 0; }
+  .step-state { margin: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse::after { animation: none; }
+}
