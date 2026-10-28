@@ -18,8 +18,8 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <meta name="color-scheme" content="only dark">
-  <meta name="theme-color" content="#07252B">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#F4ECE2">
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
@@ -33,15 +33,26 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&text=%D9%86%D9%8F%D8%B2%D9%8A%D8%AD%20%D8%A7%D9%84%D8%B3%D8%AA%D8%A7%D8%B1%20%D9%82%D8%B1%D9%8A%D8%A8%D8%A7%D9%8B&display=swap">
 
   <link rel="stylesheet" href="/styles.css">
+  <script>
+    // Apply a saved night preference before first paint (the default is day).
+    try { if (localStorage.getItem("theme") === "night") document.documentElement.dataset.theme = "night"; } catch (e) {}
+  </script>
 </head>
 <body>
   <div class="backdrop">
-    <picture>
+    <picture class="scene scene-day">
       <source media="(orientation: portrait)" type="image/webp"
               srcset="/scene-tall-720.webp 720w, /scene-tall-1080.webp 1080w, /scene-tall-1350.webp 1350w" sizes="100vw">
       <img src="/scene-wide-1920.webp" srcset="/scene-wide-1280.webp 1280w, /scene-wide-1920.webp 1920w, /scene-wide-2400.webp 2400w"
-           sizes="100vw" width="2400" height="1350" fetchpriority="high"
-           alt="قوس شعار ديوان البيانات الليبي على منصة، يغطيه ستار من الساتان يتسرّب منه ضوء حجر المفتاح، في مشهد ليلي بين الكثبان">
+           sizes="100vw" width="2400" height="1350" loading="lazy" fetchpriority="high"
+           alt="قوس شعار ديوان البيانات الليبي على منصة، يغطيه ستار شفاف بلون النعناع يتسرّب منه ضوء حجر المفتاح، بين كثبان رملية في ضوء النهار">
+    </picture>
+    <picture class="scene scene-night">
+      <source media="(orientation: portrait)" type="image/webp"
+              srcset="/scene-night-tall-720.webp 720w, /scene-night-tall-1080.webp 1080w, /scene-night-tall-1350.webp 1350w" sizes="100vw">
+      <img src="/scene-night-wide-1920.webp" srcset="/scene-night-wide-1280.webp 1280w, /scene-night-wide-1920.webp 1920w, /scene-night-wide-2400.webp 2400w"
+           sizes="100vw" width="2400" height="1350" loading="lazy" fetchpriority="high"
+           alt="المشهد نفسه ليلاً: القوس تحت الستار يضيئه حجر المفتاح من الداخل، تحت سماء مرصّعة بالنجوم">
     </picture>
   </div>
 
@@ -59,6 +70,16 @@
             <span class="latin" lang="en" dir="ltr">Libyan Data Diwan</span>
           </span>
         </a>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="الوضع الليلي">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+            <path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8Z"/>
+          </svg>
+        </button>
       </nav>
     </div>
   </header>

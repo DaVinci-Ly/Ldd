@@ -1,29 +1,48 @@
-/* Colours and type follow the Diwan brand package (Ink / Petrol / Turquoise / Verdigris).
-   Surfaces are "liquid glass": translucent panels with blur, a bevelled light rim and inner glow.
-   The backdrop is a rendered scene (the brand arch under a satin veil among dunes, rendered in
-   landscape and portrait); the text stays live HTML above it. Arabic-first (RTL), one look on every device. */
+/* Colours and type follow the Diwan brand package (Ink / Petrol / Turquoise / Verdigris, Sand / Paper).
+   Surfaces are frosted "liquid glass": translucent white panels with blur, a bright rim and soft depth.
+   The backdrop is a rendered daylight scene (the brand arch under a mint veil among sand dunes, rendered
+   in landscape and portrait); the text stays live HTML above it. Arabic-first (RTL).
+   Day is the default; the header toggle switches to a night render of the same scene (saved per visitor). */
 :root {
   --ink: #07252B;
+  --petrol: #0E4B54;
   --keystone: #34C7A9;        /* Verdigris — accent only */
-  --text: #FFFFFF;
-  --muted: rgba(255, 255, 255, 0.78);
+  --sand: #F2E7DA;
+  --text: var(--ink);
+  --muted: #4A5F60;
 
-  --glass-tint: linear-gradient(150deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03) 55%, rgba(255, 255, 255, 0.08)), rgba(7, 37, 43, 0.28);
-  --glass-solid: #12403F;
-  --glass-blur: blur(26px) saturate(140%);
-  --glass-rim: linear-gradient(160deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.18) 30%, rgba(255, 255, 255, 0.06) 60%, rgba(255, 255, 255, 0.45));
+  --glass-tint: linear-gradient(150deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.38) 55%, rgba(255, 255, 255, 0.55));
+  --glass-solid: #FBFCFC;
+  --glass-blur: blur(22px) saturate(160%);
+  --glass-rim: linear-gradient(160deg, #fff, rgba(255, 255, 255, 0.5) 35%, rgba(255, 255, 255, 0.2) 65%, rgba(255, 255, 255, 0.85));
   --glass-bevel:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.12),
-    inset 0 24px 48px -28px rgba(255, 255, 255, 0.35),
-    inset 0 -24px 48px -32px rgba(255, 255, 255, 0.18);
-  --glass-drop: 0 30px 70px -20px rgba(2, 14, 16, 0.55);
-  --hairline: rgba(255, 255, 255, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(7, 37, 43, 0.04),
+    inset 0 20px 40px -26px rgba(255, 255, 255, 0.9);
+  --glass-drop: 0 1px 2px rgba(7, 37, 43, 0.05), 0 20px 50px -20px rgba(74, 56, 30, 0.28);
+  --hairline: rgba(7, 37, 43, 0.12);
 
   --font: "Cairo", "Segoe UI", Tahoma, system-ui, sans-serif;
   --font-latin: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
   --font-display: "Aref Ruqaa", "Amiri", serif;
   --gutter: clamp(16px, 5vw, 48px);
+
+  color-scheme: light;
+}
+
+:root[data-theme="night"] {
+  --sand: #061B1F;
+  --text: #F6F3EC;
+  --muted: rgba(246, 243, 236, 0.72);
+
+  --glass-tint: linear-gradient(150deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04) 55%, rgba(255, 255, 255, 0.08)), rgba(6, 27, 31, 0.36);
+  --glass-solid: #0B2F36;
+  --glass-rim: linear-gradient(160deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.12) 35%, rgba(255, 255, 255, 0.04) 65%, rgba(255, 255, 255, 0.3));
+  --glass-bevel:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 20px 40px -26px rgba(255, 255, 255, 0.2);
+  --glass-drop: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
+  --hairline: rgba(255, 255, 255, 0.18);
 
   color-scheme: dark;
 }
@@ -37,7 +56,7 @@ body {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  background: var(--ink);
+  background: var(--sand);
   color: var(--text);
   font-family: var(--font);
   font-size: 16px;
@@ -50,7 +69,7 @@ body {
 a { color: inherit; }
 
 a:focus-visible {
-  outline: 2px solid var(--keystone);
+  outline: 2px solid var(--petrol);
   outline-offset: 4px;
   border-radius: 999px;
 }
@@ -67,22 +86,31 @@ a:focus-visible {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: var(--ink);
+  background: var(--sand);
 }
 
+/* Day and night renders are stacked; night fades in over day. Until the page script marks the
+   scenes ready, only the active one is displayed, so a lazy image for the other isn't fetched. */
+.scene {
+  position: absolute;
+  inset: 0;
+}
+
+.scene-night {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+:root[data-theme="night"] .scene-night { opacity: 1; }
+:root:not(.scenes-ready):not([data-theme="night"]) .scene-night,
+:root:not(.scenes-ready)[data-theme="night"] .scene-day { display: none; }
+
 .backdrop img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 60%;
-}
-
-/* A little shade at the top keeps the header and headline crisp over the sky */
-.backdrop::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(2, 13, 16, 0.45), transparent 38%);
 }
 
 /* Liquid glass */
@@ -101,7 +129,7 @@ a:focus-visible {
   position: absolute;
   inset: 0;
   z-index: -1;
-  padding: 1.25px;
+  padding: 1px;
   border-radius: inherit;
   background: var(--glass-rim);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -117,7 +145,7 @@ a:focus-visible {
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.14), transparent 65%);
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.6), transparent 65%);
   opacity: var(--light, 0);
   transition: opacity 0.4s;
   pointer-events: none;
@@ -140,12 +168,58 @@ a:focus-visible {
 
 .nav {
   display: flex;
+  align-items: center;
+  gap: 14px;
   width: fit-content;
   margin-inline: auto;
   padding-block: 11px;
-  padding-inline: 20px 24px;
+  padding-inline: 20px 11px;
   border-radius: 999px;
 }
+
+.nav > .brand-divider { height: 28px; align-self: center; }
+
+/* Mode toggle: a small glass disc; the sun and moon swap with a quarter turn */
+.theme-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 0 1px var(--hairline), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.3s, color 0.6s, transform 0.2s;
+}
+
+.theme-toggle:hover { transform: scale(1.06); }
+.theme-toggle:active { transform: scale(0.96); }
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--keystone);
+  outline-offset: 3px;
+}
+
+.theme-toggle svg {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.4s, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.6); }
+
+:root[data-theme="night"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px var(--hairline), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+:root[data-theme="night"] .theme-toggle .icon-sun { opacity: 0; transform: rotate(90deg) scale(0.6); }
+:root[data-theme="night"] .theme-toggle .icon-moon { opacity: 1; transform: none; color: var(--keystone); }
 
 .brand {
   display: inline-flex;
@@ -155,7 +229,7 @@ a:focus-visible {
 }
 
 .brand-mark { width: 32px; height: 32px; flex: none; }
-.brand-mark .arch { fill: #FBFCFC; }
+.brand-mark .arch { fill: var(--text); }
 .brand-mark .keystone { fill: var(--keystone); }
 
 .brand-divider {
@@ -175,7 +249,7 @@ a:focus-visible {
 .brand-name strong { font-size: 18px; font-weight: 700; }
 
 .brand-name .latin {
-  color: rgba(255, 255, 255, 0.66);
+  color: var(--muted);
   font-family: var(--font-latin);
   font-size: 12px;
   font-weight: 400;
@@ -195,11 +269,11 @@ a:focus-visible {
 
 .reveal-title {
   margin: 0;
+  color: var(--text);
   font-family: var(--font-display);
   font-size: clamp(44px, 6.4vw, 84px);
   font-weight: 700;
   line-height: 1.45;
-  text-shadow: 0 4px 30px rgba(2, 14, 16, 0.55);
   text-wrap: balance;
 }
 
@@ -207,7 +281,6 @@ a:focus-visible {
   margin: 10px 0 0;
   color: var(--muted);
   font-size: 16px;
-  text-shadow: 0 2px 12px rgba(2, 14, 16, 0.6);
 }
 
 /* 404 card — an arch-topped pane, echoing the brand mark */
@@ -224,23 +297,39 @@ main {
   text-align: center;
 }
 
-
 .chip {
   display: inline-flex;
   align-items: center;
   margin: 0 0 18px;
   padding: 5px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 999px;
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 0 0 1px var(--hairline), inset 0 1px 0 #fff;
+  color: var(--petrol);
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
 }
 
+/* Night: accents move from Petrol to Verdigris, buttons invert */
+:root[data-theme="night"] .chip {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px var(--hairline), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: var(--keystone);
+}
+
+:root[data-theme="night"] .eyebrow { color: var(--keystone); }
+:root[data-theme="night"] .button { background: #F6F3EC; color: var(--ink); }
+:root[data-theme="night"] .button:hover { background: #fff; }
+:root[data-theme="night"] .reveal-title,
+:root[data-theme="night"] .reveal-caption { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45); }
+
+/* Text colours ease across with the scene */
+body, .chip { transition: color 0.6s, background-color 0.6s; }
+
 .eyebrow {
   margin: 0 0 8px;
-  color: var(--keystone);
+  color: var(--petrol);
   font-size: 14px;
   font-weight: 600;
 }
@@ -251,7 +340,6 @@ h1 {
   font-weight: 700;
   line-height: 1.4;
   text-wrap: balance;
-  text-shadow: 0 2px 18px rgba(2, 14, 16, 0.25);
 }
 
 .lead {
@@ -270,17 +358,17 @@ h1 {
   margin-top: 30px;
   padding: 12px 26px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ink);
+  background: var(--ink);
+  color: #fff;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 10px 30px -10px rgba(2, 14, 16, 0.6), inset 0 1px 0 #fff;
+  box-shadow: 0 10px 24px -10px rgba(7, 37, 43, 0.55);
   transition: transform 0.2s, background 0.2s;
 }
 
-.button:hover { transform: translateY(-1px); background: #fff; }
+.button:hover { transform: translateY(-1px); background: var(--petrol); }
 
-/* Footer — an outlined glass pill */
+/* Footer — a small glass pill */
 .site-footer {
   padding-block: 0 calc(22px + env(safe-area-inset-bottom));
   text-align: center;
@@ -301,4 +389,24 @@ h1 {
 @media (max-height: 760px) {
   .site-header { padding-block: 14px; }
   .reveal-title { font-size: clamp(40px, 5vw, 60px); }
+}
+
+/* Entrance: the scene settles in, then the words arrive one after another */
+@media (prefers-reduced-motion: no-preference) {
+  .backdrop img { animation: settle 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .reveal > *, .card { animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .reveal > :nth-child(1) { animation-delay: 0.35s; }
+  .reveal > :nth-child(2) { animation-delay: 0.5s; }
+  .reveal > :nth-child(3) { animation-delay: 0.7s; }
+  .card { animation-delay: 0.35s; }
+}
+
+@keyframes settle {
+  from { opacity: 0; transform: scale(1.05); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
 }
